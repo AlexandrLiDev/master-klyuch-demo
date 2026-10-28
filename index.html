@@ -67,7 +67,7 @@ nav.links a:hover{color:var(--brass-l)}
 .hero-in{position:relative;padding:64px 0 46px;max-width:620px}
 .hero .eyebrow{color:var(--brass)}
 .hero h1{font-size:clamp(44px,6.4vw,84px);margin:16px 0 18px;color:#fff}
-.hero h1 span{color:var(--brass-l)}
+.hero h1 span{color:var(--brass-l);display:block}
 .lead{font-size:19px;color:#cfc6b7;max-width:40ch}
 .lead b{color:#fff;font-weight:700}
 .cta{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 30px}
@@ -395,12 +395,12 @@ document.addEventListener('click',e=>{if(e.target.closest('[data-max]')){maxModa
   const b=e.target.closest('[data-svc]');if(!b)return;const s=SVC[b.dataset.svc];
   openModal(`<h3>${s.t}</h3><p>${s.d} Срок: ${s.time}.</p><div class="plist">${s.list.map(([a,p])=>`<div><span>${a}</span><b>${p}</b></div>`).join('')}</div><p style="margin-top:14px"><b style="color:#1B1A18">Что взять:</b> ${s.bring}</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px"><button class="btn btn-brass btn-sm" data-max>Спросить в MAX</button><a class="btn btn-ghost btn-sm" href="#find" data-close>Как пройти</a></div><p style="font-size:13px;margin-top:12px">Цены для примера.</p>`,s.cap)});
 
-const DAYS=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+const DAYS=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],FULL=['понедельник','вторник','среда','четверг','пятница','суббота','воскресенье'];
 const nowKrd=()=>{const p=new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Moscow',hour12:false,hour:'2-digit',minute:'2-digit',weekday:'short'}).formatToParts(new Date());const g=t=>p.find(x=>x.type===t).value;return {h:Number(g('hour'))%24,m:Number(g('minute')),wd:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].indexOf(g('weekday'))}};
 function status(){const {h,m,wd}=nowKrd();const open=h>=OPEN&&h<CLOSE;const left=CLOSE*60-(h*60+m);$('#dot').classList.toggle('closed',!open);
   $('#stText').innerHTML=open?(left<=60?`Открыто · закроемся через ${left} мин`:'Открыто<span class="st-long"> · до 20:00</span>'):'Закрыто<span class="st-long"> · откроемся в 10:00</span>';
   $('#week').innerHTML=DAYS.map((d,i)=>`<div class="tag${i===wd?' today':''}"><b>${d}</b>10–20</div>`).join('');
-  $('#weekCap').innerHTML=open?`Сегодня ${DAYS[wd].toLowerCase()}, <b>открыто до 20:00.</b> Выходных нет, суббота и воскресенье тоже.`:(h<OPEN?`Сегодня откроемся в <b>10:00.</b> Выходных нет, суббота и воскресенье тоже.`:`Сегодня уже закрыто, завтра с <b>10:00.</b> Выходных нет.`)}
+  $('#weekCap').innerHTML=open?`Сегодня ${FULL[wd]}, <b>открыто до 20:00.</b> Выходных нет, суббота и воскресенье тоже.`:(h<OPEN?`Сегодня откроемся в <b>10:00.</b> Выходных нет, суббота и воскресенье тоже.`:`Сегодня уже закрыто, завтра с <b>10:00.</b> Выходных нет.`)}
 status();setInterval(status,60000);
 
 try{const map=L.map('map',{scrollWheelZoom:false}).setView([45.069512,39.024274],16);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);
