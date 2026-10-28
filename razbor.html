@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Разбор карточек мастерской «Мастер ключ»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--g:#1B1A18;--g2:#262421;--g3:#34312C;--brass:#C8A04A;--brass-l:#E6C77E;--brass-d:#9E7A2C;--mint:#7FC4B4;--mint-l:#DDF1EC;--mint-d:#2F7F6F;--cream:#F3EEE4;--paper:#FBF8F2;--muted:#77706A;--line:#E3DACB;--ok:#2F8A5F;--warn:#B07A12;--bad:#C2392E}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:clip}
+body{font-family:Manrope,system-ui,sans-serif;background:var(--cream);color:var(--g);line-height:1.55;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:clip}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:Oswald,Manrope,sans-serif;text-transform:uppercase;letter-spacing:.01em;line-height:1.08;font-weight:600}
+a{color:inherit}
+.top{background:#0F0E0D;color:#bdb5a8;font-size:13px;padding:9px 0}
+.top a{color:#fff;font-weight:700}
+header.hero{background:var(--g);color:#EDE6D8;padding:50px 0 34px}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
+.kicker:before{content:"";width:26px;height:2px;background:currentColor}
+header h1{font-size:clamp(34px,5.6vw,56px);margin:14px 0 16px;color:#fff}
+header h1 span{color:var(--brass-l)}
+header p{font-size:18px;color:#cfc6b7;max-width:62ch}
+.score{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:30px 0 0}
+.sc{background:var(--g2);border:1px solid #3a3631;border-radius:16px;padding:18px}
+.sc b{display:block;font-family:Oswald;font-size:36px;font-weight:600;margin:2px 0;color:#fff}
+.sc small{color:#a39b8e}
+.sc.bad b{color:#F07A6E}.sc.ok b{color:var(--mint)}
+.compare{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:30px 0}
+.compare table{width:100%;border-collapse:collapse;font-size:15px}
+.compare th,.compare td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.compare th{background:#F1EADD;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.compare tr:last-child td{border-bottom:0}
+.y{color:var(--ok);font-weight:700}.n{color:var(--bad);font-weight:700}
+h2{font-size:32px;margin:44px 0 16px}
+.find{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-bottom:12px;display:grid;grid-template-columns:auto 1fr;gap:8px 16px}
+.find>*:not(.num){grid-column:2;min-width:0}
+.num{grid-column:1;grid-row:1/span 9;width:40px;height:40px;border-radius:50%;background:var(--g);color:var(--brass-l);display:grid;place-items:center;font-family:Oswald;font-size:17px;font-weight:600}
+.find h3{font-family:Manrope;text-transform:none;letter-spacing:0;font-size:19px;font-weight:800;line-height:1.3;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.tag{font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px}
+.tag.hi{background:#FBE3E0;color:var(--bad)}.tag.mid{background:#FBEFD5;color:var(--warn)}.tag.lo{background:var(--mint-l);color:var(--mint-d)}
+.find p{color:#3e3a35}
+.find q{font-style:italic}
+.fix{background:var(--mint-l);border-radius:10px;padding:10px 12px;font-size:15px}
+.fix b{color:var(--mint-d)}
+.shot{display:block;margin-top:4px;border-radius:12px;border:1px solid var(--line);width:100%;max-width:380px;height:auto}
+.offer{background:var(--g);color:#EDE6D8;border-radius:22px;padding:30px;margin:44px 0 20px;border-top:8px solid var(--brass)}
+.offer h2{margin:0 0 12px;color:#fff}
+.offer ul{list-style:none;display:grid;gap:9px;margin:16px 0 20px}
+.offer li{padding-left:28px;position:relative}
+.offer li:before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;background:var(--g);box-shadow:inset 0 0 0 4px var(--brass)}
+.offer a{color:var(--brass-l)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:99px;font-weight:700;text-decoration:none;background:var(--brass);color:var(--g)}
+.btn.o{background:transparent;border:1.5px solid rgba(255,255,255,.4);color:#fff}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+footer{padding:20px 0 50px;color:var(--muted);font-size:14px}
+@media (max-width:640px){.wrap{padding:0 16px}header.hero{padding:34px 0 26px}.score{grid-template-columns:1fr}.find{grid-template-columns:1fr;padding:18px 16px}.find>*:not(.num){grid-column:1}.num{grid-row:auto}.compare{overflow-x:auto}.compare table{min-width:540px}.offer{padding:22px 18px}h2{font-size:28px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap">Разбор подготовил Александр Ли для мастерской «Мастер ключ», 28 октября 2026 · <a href="index.html">Концепт сайта →</a></div></div>
+
+<header class="hero"><div class="wrap">
+  <span class="kicker">«Мастер ключ» · Восточно-Кругликовская, 65</span>
+  <h1>Пять звёзд на обеих картах, <span>а карточками никто не занимается</span></h1>
+  <p>Посмотрел, как мастерская выглядит в 2ГИС и Яндекс Картах. Отзывы отличные: 5,0 в обоих сервисах. Но карточки брошены: Яндекс никому не принадлежит, 2ГИС предупреждает, что данные устарели, а на вашей странице рекламируется соседняя мастерская. Почти всё исправляется за неделю и бесплатно.</p>
+  <div class="score">
+    <div class="sc ok"><small>Рейтинг в 2ГИС и Яндексе</small><b>5,0</b><small>85 и 63 оценки</small></div>
+    <div class="sc bad"><small>Ответов на отзывы</small><b>0</b><small>из 50 последних в 2ГИС</small></div>
+    <div class="sc bad"><small>Карточка в Яндексе</small><b>Ничья</b><small>владелец не подтверждён</small></div>
+  </div>
+</div></header>
+
+<main class="wrap">
+  <div class="compare"><table>
+    <tr><th></th><th>2ГИС</th><th>Яндекс Карты</th></tr>
+    <tr><td>Рейтинг</td><td>5,0 · 85 оценок, 58 отзывов</td><td>5,0 · 63 оценки, 42 отзыва</td></tr>
+    <tr><td>Карточка подтверждена</td><td class="n">Плашка «давно не обновляла данные»</td><td class="n">Нет, «Вы владелец этой организации?»</td></tr>
+    <tr><td>Часы работы</td><td>Ежедневно 10:00–20:00</td><td>Открыто до 20:00</td></tr>
+    <tr><td>Цены</td><td class="n">Нет</td><td class="n">Нет</td></tr>
+    <tr><td>Ответы на отзывы</td><td class="n">0 из 50</td><td class="n">Нельзя, карточка не ваша</td></tr>
+    <tr><td>Рубрики</td><td>2: ключи, ремонт обуви и кожгалантереи</td><td>3: ремонт обуви, ключи, металлоремонт</td></tr>
+    <tr><td>Фото</td><td>21, снаружи 3</td><td>27</td></tr>
+    <tr><td>Сайт</td><td class="n">Нет</td><td class="n">Нет</td></tr>
+  </table></div>
+
+  <h2>Что нашёл</h2>
+
+  <div class="find"><span class="num">1</span>
+    <h3>Карточка в Яндекс Картах никому не принадлежит <span class="tag hi">важно</span></h3>
+    <p>На карточке висит «Вы владелец этой организации?» и кнопка «Стать владельцем». Пока она не подтверждена, вы не можете ответить ни на один из 42 отзывов, поменять фото, добавить цены и мессенджеры. Сейчас в Яндексе у вас только телефон, без WhatsApp и Telegram, которые указаны в 2ГИС.</p>
+    <div class="fix"><b>Что сделать:</b> подтвердить карточку через Яндекс Бизнес. Бесплатно, нужен звонок или СМС на номер мастерской.</div>
+  </div>
+
+  <div class="find"><span class="num">2</span>
+    <h3>2ГИС пишет каждому: «Компания давно не обновляла данные» <span class="tag hi">важно</span></h3>
+    <p>Эта строка стоит прямо под телефоном, её видит каждый, кто открыл карточку. В разделе «Инфо» ещё и «Актуальность данных не подтверждена». Человек, которому срочно нужен ключ, читает это как «может, уже не работают» и звонит другим.</p>
+    <div class="fix"><b>Что сделать:</b> зайти в кабинет 2ГИС («Это моя компания») и подтвердить данные. Бесплатно, минут 10.</div>
+  </div>
+
+  <div class="find"><span class="num">3</span>
+    <h3>На вашей карточке рекламируется другая мастерская <span class="tag hi">важно</span></h3>
+    <p>Сразу под плашкой про устаревшие данные, в блоке «Похожие организации», стоит реклама: «Элит класс, мастерская по ремонту обуви и изготовлению ключей. Изготовление всех видов ключей» с кнопкой «Позвонить». То есть человек ищет вас, а первым ему предлагают позвонить соседям.</p>
+    <div class="fix"><b>Что сделать:</b> подтверждённая карточка с ценами, фото и ответами удерживает внимание на вас. В рекламных пакетах 2ГИС есть возможность убрать конкурентов со своей карточки, цену стоит уточнить отдельно.</div>
+  </div>
+
+  <div class="find"><span class="num">4</span>
+    <h3>58 отзывов, и ни одного ответа <span class="tag mid">заметно</span></h3>
+    <p>Люди пишут «Овик, отличный мастер», «единственный мастер на районе, который работает в субботу», «никто не брался, а тут быстро». Ни на один из 50 последних отзывов нет ответа, в том числе на два отзыва с одной звездой (2022 и 2023 годов), которые до сих пор висят без вашей версии событий.</p>
+    <div class="fix"><b>Что сделать:</b> коротко ответить на все отзывы, на плохие спокойно и по делу. Дальше отвечать на новые, 15 минут в неделю, могу взять на себя.</div>
+  </div>
+
+  <div class="find"><span class="num">5</span>
+    <h3>Нет цен, хотя о них спрашивают первым делом <span class="tag mid">заметно</span></h3>
+    <p>Вкладка «Цены» в 2ГИС пустая. В «Вопросах о месте» висят: «Сколько стоит дубликат ключа?», «Сколько стоит домофонный брелок?», «Делают автоключи с чипом?», «Есть гарантия на дубликат?». Отвечаете на них не вы, а ИИ-помощник 2ГИС.</p>
+    <div class="fix"><b>Что сделать:</b> 10–15 позиций с ценой «от»: дубликат ключа, домофонная таблетка, автоключ, набойки, молния, батарейка в часах. И ответить на эти вопросы от имени мастерской.</div>
+  </div>
+
+  <div class="find"><span class="num">6</span>
+    <h3>Половину того, что вы делаете, в 2ГИС не найти <span class="tag mid">заметно</span></h3>
+    <p>В 2ГИС у вас всего две рубрики: «Изготовление ключей» и «Ремонт обуви и кожгалантереи». А в отзывах люди пишут про ключи от домофона, автоключи и их программирование, заточку секатора, батарейки в часах, кнопки на куртку, замки на рюкзаках. По запросам «ключ от домофона» или «автоключ» 2ГИС вас не покажет.</p>
+    <div class="fix"><b>Что сделать:</b> добавить рубрики «Изготовление ключей для домофона», «Изготовление автоключей», «Заточка», «Ремонт сумок», «Замена батареек в часах», если вы это делаете постоянно.</div>
+  </div>
+
+  <div class="find"><span class="num">7</span>
+    <h3>Название на картах есть, а на доме нет, и вход не показан <span class="tag lo">просто</span></h3>
+    <p>На вывеске написано «Ремонт обуви, изготовление ключей», слов «Мастер ключ» на фасаде нет. Сама мастерская в цоколе, и судя по фото, спуск к ней под общим бордовым козырьком, рядом с другими магазинами. Из 21 фото в 2ГИС снаружи только 3, и ни на одном нет лестницы и двери.</p>
+    <img class="shot" src="img/facade.jpg" alt="Фасад дома 65 с вывеской мастерской" loading="lazy">
+    <div class="fix"><b>Что сделать:</b> первым фото поставить фасад со стрелкой на спуск, добавить 2 фото «как пройти». На сайте такой блок уже есть.</div>
+  </div>
+
+  <div class="find"><span class="num">8</span>
+    <h3>В Яндексе почти вдвое меньше оценок, чем у соседей <span class="tag lo">просто</span></h3>
+    <p>У вас 63 оценки. В «Похожих местах» рядом Яндекс показывает две мастерские ключей с тем же рейтингом 5,0, но со 110 и 84 оценками, а у одной из них 202 фото против ваших 27. При равном рейтинге люди выбирают тех, у кого больше отзывов и фото.</p>
+    <div class="fix"><b>Что сделать:</b> табличка с QR-кодом «Оцените нас в Яндексе» на стойке и короткая просьба после работы. Обычно это 5–10 новых отзывов в месяц.</div>
+  </div>
+
+  <div class="offer">
+    <h2>Что предлагаю</h2>
+    <p>Беру на себя всё из списка, от вас нужно только подтвердить карточки кодом из СМС.</p>
+    <ul>
+      <li>Подтвердить карточки в 2ГИС и Яндексе, выставить одинаковые часы, рубрики и цены</li>
+      <li>Ответить на все отзывы и дальше отвечать на новые</li>
+      <li>Поставить хорошие фото: фасад со спуском, зал, работы</li>
+      <li>Сайт мастерской со ссылкой из обеих карточек: <a href="index.html">вот концепт</a></li>
+      <li>Раз в месяц отчёт: сколько людей посмотрели карточку, позвонили и построили маршрут</li>
+    </ul>
+    <p style="margin-bottom:18px">Разбор бесплатный. Стоимость работ обсудим, она небольшая.</p>
+    <div class="btns">
+      <a class="btn" href="https://t.me/DezmontDeXa" target="_blank" rel="noopener">Написать в Telegram</a>
+      <a class="btn o" href="tel:+79147765705">+7 914 776-57-05</a>
+    </div>
+  </div>
+</main>
+<footer><div class="wrap">Данные из открытых карточек 2ГИС и Яндекс Карт на 28 октября 2026. Фото из карточки 2ГИС. Александр Ли.</div></footer>
+</body>
+</html>

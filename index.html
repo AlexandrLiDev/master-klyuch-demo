@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Мастер ключ · концепт сайта мастерской</title>
+<meta name="description" content="Концепт сайта мастерской «Мастер ключ» в Краснодаре: ключи, домофонные и автоключи, ремонт обуви и сумок. Демо, не официальный сайт.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Сайт для «Мастер ключ»">
+<meta property="og:description" content="Ключи, обувь, сумки. Каждый день с 10 до 20, без выходных. Цены, что сюда уже приносили и как спуститься в цоколь.">
+<meta property="og:image" content="https://alexandrlidev.github.io/master-klyuch-demo/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://alexandrlidev.github.io/master-klyuch-demo/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{--g:#1B1A18;--g2:#262421;--g3:#34312C;--brass:#C8A04A;--brass-l:#E6C77E;--brass-d:#9E7A2C;--mint:#7FC4B4;--mint-l:#DDF1EC;--mint-d:#2F7F6F;--cream:#F3EEE4;--paper:#FBF8F2;--beech:#E2C9A0;--sign:#C8262B;--muted:#77706A;--line:#E3DACB;--ok:#3FB37F;--bad:#E05A4E;--r:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{font-family:Manrope,system-ui,sans-serif;background:var(--cream);color:var(--g);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block;max-width:100%}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+h1,h2,h3,.os{font-family:Oswald,Manrope,sans-serif;text-transform:uppercase;letter-spacing:.01em;line-height:1.05;font-weight:600}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brass-d)}
+.eyebrow:before{content:"";width:26px;height:2px;background:currentColor}
+
+.ribbon{background:#0F0E0D;color:#bdb5a8;font-size:13px;padding:8px 0}
+.ribbon .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.ribbon b{color:var(--brass-l)}
+.ribbon a{color:#fff;font-weight:700}
+
+header.top{position:sticky;top:0;z-index:50;background:rgba(27,26,24,.94);backdrop-filter:blur(10px);color:#EDE6D8;border-bottom:1px solid #3a3631}
+header.top .wrap{display:flex;align-items:center;gap:18px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo .seal{width:42px;height:42px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+.logo .wm{display:flex;flex-direction:column;line-height:1}
+.logo .wm small{font-size:10px;font-weight:700;letter-spacing:.2em;color:var(--brass)}
+.logo .wm b{font-family:Oswald;font-weight:700;font-size:21px;letter-spacing:.03em;text-transform:uppercase;color:#fff}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;padding:6px 12px;border-radius:99px;background:var(--g3);white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(63,179,127,.2)}
+.dot.closed{background:var(--bad);box-shadow:0 0 0 4px rgba(224,90,78,.2)}
+nav.links{display:flex;gap:22px;font-weight:600;font-size:15px}
+nav.links a{text-decoration:none;color:#d8d0c2}
+nav.links a:hover{color:var(--brass-l)}
+.sp{flex:1}
+.phone{font-weight:700;text-decoration:none;white-space:nowrap;color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:700;font-size:16px;text-decoration:none;transition:transform .15s,background .15s,border-color .15s}
+.btn:active{transform:translateY(1px)}
+.btn-brass{background:var(--brass);color:var(--g)}.btn-brass:hover{background:var(--brass-l)}
+.btn-line{border:1.5px solid rgba(255,255,255,.35);color:#fff}.btn-line:hover{border-color:var(--brass-l)}
+.btn-dark{background:var(--g);color:#fff}.btn-dark:hover{background:var(--g3)}
+.btn-ghost{border:1.5px solid var(--line);background:#fff}
+.btn-sm{padding:10px 16px;font-size:15px}
+
+/* HERO */
+.hero{position:relative;background:var(--g);color:#EDE6D8;overflow:hidden}
+.hero-bg{position:absolute;top:0;right:0;bottom:0;width:58%}
+.hero-bg img{width:100%;height:100%;object-fit:cover}
+.hero-bg:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--g) 0%,rgba(27,26,24,.75) 28%,rgba(27,26,24,.05) 70%)}
+.hero-in{position:relative;padding:64px 0 46px;max-width:620px}
+.hero .eyebrow{color:var(--brass)}
+.hero h1{font-size:clamp(44px,6.4vw,84px);margin:16px 0 18px;color:#fff}
+.hero h1 span{color:var(--brass-l)}
+.lead{font-size:19px;color:#cfc6b7;max-width:40ch}
+.lead b{color:#fff;font-weight:700}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 30px}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;max-width:520px}
+.tag{position:relative;background:var(--g3);border-radius:10px 10px 12px 12px;padding:20px 4px 9px;text-align:center;font-size:12px;color:#bdb5a8;border:1px solid #45413a}
+.tag:before{content:"";position:absolute;top:7px;left:50%;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:var(--g);box-shadow:inset 0 0 0 1.5px #5a554c}
+.tag b{display:block;font-family:Oswald;font-size:18px;font-weight:600;color:#fff;text-transform:uppercase}
+.tag.today{background:var(--brass);border-color:var(--brass);color:var(--g)}
+.tag.today b{color:var(--g)}
+.tag.today:before{box-shadow:inset 0 0 0 1.5px var(--brass-d)}
+.week-cap{font-size:14px;color:#a39b8e;margin-top:10px}
+.week-cap b{color:var(--brass-l)}
+.hero-rates{display:flex;gap:18px;flex-wrap:wrap;margin-top:26px;padding-top:20px;border-top:1px solid #3a3631;max-width:520px}
+.hero-rates div{font-size:14px;color:#a39b8e}
+.hero-rates b{font-family:Oswald;font-size:26px;color:#fff;margin-right:6px;font-weight:600}
+.hero-rates i{font-style:normal;color:var(--brass)}
+.stamp{position:absolute;right:28px;bottom:28px;background:var(--paper);color:var(--g);border-radius:14px;padding:14px 16px;max-width:250px;box-shadow:0 18px 40px -18px rgba(0,0,0,.7);font-size:14px;transform:rotate(-2deg)}
+.stamp b{display:block;font-family:Oswald;text-transform:uppercase;font-size:20px;font-weight:600;line-height:1.1;margin-bottom:4px}
+
+section{padding:64px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(30px,4vw,48px);margin-top:10px}
+.sec-head p{color:var(--muted);max-width:46ch}
+
+/* SERVICES as key tags */
+.svcs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.svc{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:14px 14px 14px 40px;padding:22px 22px 20px 30px;text-align:left;display:flex;flex-direction:column;gap:8px;overflow:hidden;transition:transform .15s,box-shadow .15s}
+.svc:before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--cap)}
+.svc:after{content:"";position:absolute;right:18px;top:18px;width:14px;height:14px;border-radius:50%;background:var(--cream);box-shadow:inset 0 1px 2px rgba(0,0,0,.25)}
+.svc:hover{transform:translateY(-3px);box-shadow:0 16px 30px -20px rgba(0,0,0,.45)}
+.svc .time{font-size:13px;font-weight:700;color:var(--mint-d)}
+.svc h3{font-size:24px;padding-right:20px}
+.svc p{color:var(--muted);font-size:15px}
+.svc .foot{margin-top:auto;padding-top:10px;display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--line)}
+.svc .price{font-family:Oswald;font-weight:600;font-size:20px}
+.svc .more{font-size:14px;font-weight:700;color:var(--brass-d)}
+.note{font-size:14px;color:var(--muted);margin-top:16px}
+
+/* BROUGHT */
+.brought{background:var(--g);color:#EDE6D8}
+.brought .eyebrow{color:var(--mint)}
+.brought .sec-head p{color:#a39b8e}
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.job{background:var(--g2);border:1px solid #3a3631;border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.job h3{font-size:19px;color:#fff;letter-spacing:.02em}
+.job h3 span{display:block;font-family:Manrope;text-transform:none;font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--mint);margin-bottom:6px}
+.job q{quotes:none;font-size:15px;color:#cfc6b7}
+.job small{margin-top:auto;color:#8c8478;font-size:13px}
+.ask-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:22px;background:var(--g3);border-radius:16px;padding:18px 20px}
+.ask-row p{font-size:17px;color:#fff;font-weight:600}
+.ask-row p span{display:block;color:#a39b8e;font-weight:500;font-size:15px}
+
+/* INSIDE */
+.inside{display:grid;grid-template-columns:1.25fr 1fr 1fr;grid-template-rows:auto auto;gap:12px}
+.inside figure{position:relative;border-radius:var(--r);overflow:hidden;background:#ddd}
+.inside img{width:100%;height:100%;object-fit:cover}
+.inside .big{grid-row:1/span 2;min-height:420px}
+.inside .sm{aspect-ratio:4/3}
+.inside figcaption{position:absolute;left:10px;bottom:10px;background:rgba(27,26,24,.78);color:#fff;font-size:13px;font-weight:600;padding:5px 10px;border-radius:8px}
+.vibe{grid-column:2/span 2;background:var(--mint-l);border-radius:var(--r);padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.vibe p{font-size:16px}
+.vibe b{display:block;font-family:Oswald;text-transform:uppercase;font-size:20px;font-weight:600;color:var(--mint-d);margin-bottom:4px}
+.vibe small{color:var(--muted)}
+
+/* WORKS strip */
+.works{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:12px}
+.works figure{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:1;background:#ddd}
+.works img{width:100%;height:100%;object-fit:cover}
+.works figcaption{position:absolute;left:0;right:0;bottom:0;padding:20px 10px 8px;background:linear-gradient(transparent,rgba(0,0,0,.72));color:#fff;font-size:13px;font-weight:700}
+
+/* REVIEWS */
+.reviews{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.rev{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:10px}
+.rev .stars{color:var(--brass);letter-spacing:2px}
+.rev p{font-size:16px}
+.rev small{color:var(--muted);margin-top:auto}
+
+/* FIND */
+.find{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+.route{list-style:none;display:grid;gap:12px;counter-reset:st}
+.route li{display:grid;grid-template-columns:150px 1fr;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:10px;align-items:center}
+.route img{width:150px;height:112px;object-fit:cover;border-radius:10px}
+.route b{display:flex;align-items:center;gap:8px;font-family:Oswald;text-transform:uppercase;font-size:19px;font-weight:600;margin-bottom:4px}
+.route b:before{counter-increment:st;content:counter(st);width:26px;height:26px;border-radius:50%;background:var(--g);color:var(--brass-l);display:grid;place-items:center;font-size:14px;flex:none}
+.route p{font-size:15px;color:#4a4540}
+.route small{display:block;color:var(--muted);font-size:13px;margin-top:4px}
+.info{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:12px}
+.info .row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:10px;font-size:15px}
+.info .row b{text-align:right}
+.info .row:last-of-type{border-bottom:0}
+#map{height:280px;border-radius:12px;z-index:1}
+
+footer{background:var(--g);color:#bdb5a8;padding:44px 0 110px}
+footer .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:30px}
+footer p{max-width:42ch;margin-top:14px}
+.demo-box{background:var(--g2);border:1px dashed #5a554c;border-radius:var(--r);padding:16px;font-size:14px}
+.demo-box b{color:var(--brass-l)}
+footer a{color:#fff}
+
+.overlay{position:fixed;inset:0;background:rgba(15,14,13,.55);z-index:90;opacity:0;pointer-events:none;transition:opacity .2s}
+.overlay.show{opacity:1;pointer-events:auto}
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-46%);opacity:0;pointer-events:none;width:min(480px,calc(100% - 32px));max-height:calc(100% - 32px);overflow:auto;background:var(--paper);border-radius:20px;z-index:110;padding:26px 24px 22px;transition:all .2s;border-top:8px solid var(--cap,var(--brass))}
+.modal.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
+.modal h3{font-size:26px;margin-bottom:8px;padding-right:34px}
+.modal p{color:var(--muted)}
+.x{position:absolute;right:12px;top:12px;width:36px;height:36px;border-radius:10px;display:grid;place-items:center}
+.x:hover{background:#eee6d8}
+.plist{display:grid;gap:6px;margin-top:14px}
+.plist div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--line);padding-bottom:6px}
+.mbar{display:none}
+
+@media (max-width:1000px){
+  nav.links{display:none}
+  .hero-bg{width:100%;opacity:.38}
+  .hero-bg:after{background:linear-gradient(180deg,rgba(27,26,24,.4),var(--g))}
+  .stamp{display:none}
+  .svcs{grid-template-columns:repeat(2,1fr)}
+  .board{grid-template-columns:repeat(2,1fr)}
+  .reviews{grid-template-columns:repeat(2,1fr)}
+  .find{grid-template-columns:1fr}
+  .inside{grid-template-columns:1fr 1fr}
+  .inside .big{grid-row:auto;grid-column:1/span 2;min-height:300px}
+  .vibe{grid-column:1/span 2}
+  .works{grid-template-columns:repeat(3,1fr)}
+  footer .wrap{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  header.top .wrap{height:60px;gap:10px}
+  .phone,.st-long,.hdr-max,.logo .wm small{display:none}
+  .logo .wm b{font-size:18px}
+  .logo .seal{width:36px;height:36px}
+  .hero-in{padding:40px 0 34px}
+  .lead{font-size:17px}
+  .week{gap:4px}
+  .tag{padding:18px 0 7px;font-size:11px}
+  .tag b{font-size:15px}
+  .svcs,.board,.reviews{grid-template-columns:1fr}
+  .vibe{grid-template-columns:1fr}
+  .works{grid-template-columns:repeat(2,1fr)}
+  .works figure:last-child{display:none}
+  .route li{grid-template-columns:110px 1fr;gap:12px}
+  .route img{width:110px;height:96px}
+  .route b{font-size:17px}
+  section{padding:46px 0}
+  .mbar{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;left:10px;right:10px;bottom:10px;z-index:80;background:var(--g);border:1px solid #3a3631;border-radius:18px;padding:6px;gap:6px;box-shadow:0 10px 30px -10px rgba(0,0,0,.6)}
+  .mbar a,.mbar button{display:flex;flex-direction:column;align-items:center;gap:2px;color:#fff;font-size:12px;font-weight:700;padding:8px 4px;border-radius:13px;text-decoration:none}
+  .mbar .r{background:var(--brass);color:var(--g)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="ribbon"><div class="wrap">
+  <span><b>Концепт сайта</b> для «Мастер ключ». Цены для примера.</span>
+  <span>Сделал Александр Ли · <a href="https://t.me/DezmontDeXa" target="_blank" rel="noopener">Telegram</a></span>
+</div></div>
+
+<header class="top"><div class="wrap">
+  <a class="logo" href="#top" aria-label="Мастер ключ">
+    <span class="seal"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 6h7v13l6 3v4H6z" fill="#3B2A22"/><circle cx="21" cy="11" r="4" fill="none" stroke="#C8A04A" stroke-width="2.4"/><path d="M23.5 13.5 29 19M26 16.5l-2 2M28 18.5l-1.6 1.6" stroke="#C8A04A" stroke-width="2.4" stroke-linecap="round"/></svg></span>
+    <span class="wm"><small>МАСТЕРСКАЯ</small><b>Мастер ключ</b></span>
+  </a>
+  <span class="status"><span class="dot" id="dot"></span><span id="stText">…</span></span>
+  <nav class="links"><a href="#services">Услуги и цены</a><a href="#brought">Что приносят</a><a href="#inside">Внутри</a><a href="#find">Как пройти</a></nav>
+  <span class="sp"></span>
+  <a class="phone" href="tel:+79181506565">+7 918 150-65-65</a>
+  <button class="btn btn-brass btn-sm hdr-max" data-max>Спросить в MAX</button>
+</div></header>
+
+<main id="top">
+<section class="hero" style="padding:0">
+  <div class="hero-bg"><img src="img/keywall.jpg" alt="Стена с заготовками ключей и домофонными брелоками" fetchpriority="high"></div>
+  <div class="wrap"><div class="hero-in">
+    <span class="eyebrow">Восточно-Кругликовская, 65 · цоколь</span>
+    <h1>Ключи, обувь, сумки. <span>Без выходных.</span></h1>
+    <p class="lead">Дубликат ключа делаем при вас, пока ждёте на диване. Чиним обувь, сумки, рюкзаки и мелочи, за которые <b>в других местах не берутся.</b></p>
+    <div class="cta">
+      <button class="btn btn-brass" data-max>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
+        Спросить в MAX
+      </button>
+      <a class="btn btn-line" href="#find">Как спуститься в цоколь</a>
+    </div>
+    <div class="week" id="week" aria-label="Расписание на неделю"></div>
+    <p class="week-cap" id="weekCap">Каждый день с 10:00 до 20:00, суббота и воскресенье тоже.</p>
+    <div class="hero-rates">
+      <div><b>5,0</b><i>★</i> 2ГИС · 85 оценок</div>
+      <div><b>5,0</b><i>★</i> Яндекс · 63 оценки</div>
+    </div>
+  </div></div>
+  <div class="stamp"><b>Ключ за 5–10 минут</b>Так пишут в отзывах: «сделал меньше пяти минут», «в течение 10 минут всё готово».</div>
+</section>
+
+<section id="services"><div class="wrap">
+  <div class="sec-head">
+    <div><span class="eyebrow">Услуги и цены</span><h2>С чем приходить</h2></div>
+    <p>Нажмите на бирку, чтобы увидеть цены, сроки и что взять с собой.</p>
+  </div>
+  <div class="svcs" id="svcs"></div>
+  <p class="note">Цены в концепте для примера, на сайте будут ваши.</p>
+</div></section>
+
+<section id="brought" class="brought"><div class="wrap">
+  <div class="sec-head">
+    <div><span class="eyebrow">Из отзывов в 2ГИС</span><h2 style="color:#fff">Что сюда уже приносили</h2></div>
+    <p>Не уверены, возьмутся ли за вашу вещь? Вот задачи, с которыми люди приходили и о которых потом написали.</p>
+  </div>
+  <div class="board">
+    <div class="job"><h3><span>ОДЕЖДА</span>Кнопка на куртку</h3><q>Долго искала мастера, никто не брался, а тут быстро и качественно.</q><small>Дарья К., январь 2026</small></div>
+    <div class="job"><h3><span>ОБУВЬ, СРОЧНО</span>Обувь к мероприятию за полчаса</h3><q>Мастер вошёл в положение, я получила обувь буквально через полчаса.</q><small>Марине Г., апрель 2025</small></div>
+    <div class="job"><h3><span>ДОМОФОН</span>Ключ от подъезда без подсказок</h3><q>Оперативно сделали ключи от домофона, даже с ходу определив дом.</q><small>Мария А., август 2025</small></div>
+    <div class="job"><h3><span>РЮКЗАК И КЛЮЧИ</span>Замок на рюкзак, программирование ключей</h3><q>Сделали всё быстро и качественно.</q><small>Владислав Л., июль 2025</small></div>
+    <div class="job"><h3><span>ИЗ КОПИИ</span>Полноценные ключи из копий</h3><q>Из копий сделал полноценные ключи.</q><small>Юлия П., ноябрь 2023</small></div>
+    <div class="job"><h3><span>ДАЧА</span>Заточить секатор</h3><q>Делал ключи, точил секатор, ремонтировал обувь. Каждый раз аккуратно и в срок.</q><small>Виталий К., июль 2025</small></div>
+    <div class="job"><h3><span>ДОРОГА</span>Подшить дорожную сумку</h3><q>Много ключей нам делали, недавно обувь чинили и сумку дорожную подшивали.</q><small>Кристина Б., июль 2025</small></div>
+    <div class="job"><h3><span>МЕЛОЧИ</span>Ремень, магниты, батарейка в часах</h3><q>Укорачивал ремни, изготавливал ключи и магниты, менял батарейки в часах.</q><small>Тимофей П., октябрь 2025</small></div>
+  </div>
+  <div class="ask-row">
+    <p>Вашей задачи нет в списке?<span>Сфотографируйте вещь и спросите, мастер ответит, возьмётся ли и сколько это будет стоить.</span></p>
+    <button class="btn btn-brass" data-max>Спросить в MAX</button>
+  </div>
+</div></section>
+
+<section id="inside"><div class="wrap">
+  <div class="sec-head">
+    <div><span class="eyebrow">Внутри</span><h2>Светлый зал в цоколе</h2></div>
+    <p>Фото из карточки 2ГИС. Можно подождать на диване, пока делают ключ или подбивают каблук.</p>
+  </div>
+  <div class="inside">
+    <figure class="big"><img src="img/hall.jpg" alt="Зал мастерской: стойка, диван, стена с ключами" loading="lazy"><figcaption>Зал и стойка</figcaption></figure>
+    <figure class="sm"><img src="img/bench.jpg" alt="Станки для изготовления ключей" loading="lazy"><figcaption>Станки для ключей</figcaption></figure>
+    <figure class="sm"><img src="img/w-carkeys.jpg" alt="Витрина с заготовками автоключей" loading="lazy"><figcaption>Заготовки автоключей</figcaption></figure>
+    <div class="vibe">
+      <p><b>Чисто и вкусно пахнет</b>«В помещении вкусно пахнет и чисто, всё понравилось».<br><small>Анна, октябрь 2026</small></p>
+      <p><b>Играет классика рока</b>«Атмосфера в мастерской очень положительная, играет приятная музыка (классика рока)».<br><small>Lana, апрель 2025</small></p>
+    </div>
+  </div>
+  <div class="works">
+    <figure><img src="img/w-keychip.jpg" alt="Ключ и домофонная таблетка" loading="lazy"><figcaption>Ключ и таблетка</figcaption></figure>
+    <figure><img src="img/w-blanks.jpg" alt="Заготовки ключей на стене" loading="lazy"><figcaption>Заготовки ключей</figcaption></figure>
+    <figure><img src="img/w-sandals.jpg" alt="Сандалии на стойке мастерской" loading="lazy"><figcaption>Обувь в работе</figcaption></figure>
+    <figure><img src="img/w-care.jpg" alt="Шнурки и средства ухода за обувью" loading="lazy"><figcaption>Шнурки и уход</figcaption></figure>
+    <figure><img src="img/counter.jpg" alt="Стойка мастерской" loading="lazy"><figcaption>Стойка приёма</figcaption></figure>
+  </div>
+</div></section>
+
+<section id="reviews" style="padding-top:10px"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">Отзывы из 2ГИС</span><h2>Ходят годами</h2></div><p>58 отзывов и 85 оценок, средняя 5,0.</p></div>
+  <div class="reviews">
+    <div class="rev"><div class="stars">★★★★★</div><p>Овик, отличный мастер. Делаю ключи много лет только у него.</p><small>Евгений З., апрель 2026</small></div>
+    <div class="rev"><div class="stars">★★★★★</div><p>Единственный мастер на районе, который работает в субботу. Весь район объездили, везде закрыто.</p><small>Ольга Г., август 2025</small></div>
+    <div class="rev"><div class="stars">★★★★★</div><p>Ключ от домофона мастер сделал за секунды. Обувь отремонтировал на 10 из 10.</p><small>Любовь Д., сентябрь 2025</small></div>
+    <div class="rev"><div class="stars">★★★★★</div><p>Я сюда хожу много лет, всех соседей сюда отправляю, так как рядом.</p><small>Кристина Б., июль 2025</small></div>
+  </div>
+</div></section>
+
+<section id="find"><div class="wrap">
+  <div class="sec-head">
+    <div><span class="eyebrow">Как пройти</span><h2>Мастерская внизу, в цоколе</h2></div>
+    <p>С улицы видна только вывеска на втором ярусе. Вот как дойти до двери.</p>
+  </div>
+  <div class="find">
+    <ol class="route">
+      <li><img src="img/facade.jpg" alt="Дом 65 с вывеской «Ремонт обуви, изготовление ключей»" loading="lazy"><div><b>Ищите вывеску</b><p>Белая вывеска с красными буквами «Ремонт обуви, изготовление ключей» и сапогом с ключом. Рядом «Аптека» и «Продукты».</p></div></li>
+      <li><img src="img/awning.jpg" alt="Спуск в цоколь под бордовым козырьком" loading="lazy"><div><b>Под козырёк и вниз</b><p>Под бордовым козырьком лестница в цокольный этаж, у входа табличка «Ремонт обуви».</p><small>Вход на концепте указан по фото, в рабочей версии уточним у мастера.</small></div></li>
+      <li><img src="img/inside.jpg" alt="Зал мастерской у входа" loading="lazy"><div><b>Вы на месте</b><p>Светлый зал со стойкой и диваном. Ключ сделают, пока вы ждёте.</p></div></li>
+    </ol>
+    <div class="info">
+      <div id="map" aria-label="Карта"></div>
+      <div class="row"><span>Адрес</span><b>ул. Восточно-Кругликовская, 65, цоколь</b></div>
+      <div class="row"><span>Часы</span><b>Ежедневно 10:00–20:00</b></div>
+      <div class="row"><span>Телефон</span><a href="tel:+79181506565"><b>+7 918 150-65-65</b></a></div>
+      <div class="row"><span>Оплата</span><b>Наличные, перевод с карты</b></div>
+      <div class="row"><span>Остановка</span><b>«Домбайская», 200 м</b></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn btn-dark btn-sm" target="_blank" rel="noopener" href="https://yandex.ru/maps/?rtext=~45.069512,39.024274&rtt=pd">Маршрут</a>
+        <a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="https://2gis.ru/krasnodar/firm/70000001019502606">2ГИС</a>
+        <a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="https://yandex.ru/maps/org/master_klyuch/1598189619/">Яндекс Карты</a>
+      </div>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div>
+    <span class="logo"><span class="seal"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 6h7v13l6 3v4H6z" fill="#3B2A22"/><circle cx="21" cy="11" r="4" fill="none" stroke="#C8A04A" stroke-width="2.4"/><path d="M23.5 13.5 29 19M26 16.5l-2 2M28 18.5l-1.6 1.6" stroke="#C8A04A" stroke-width="2.4" stroke-linecap="round"/></svg></span><span class="wm"><small>МАСТЕРСКАЯ</small><b>Мастер ключ</b></span></span>
+    <p>Дубликаты ключей, домофонные и автоключи, ремонт обуви, сумок и рюкзаков, мелкий ремонт. Восточно-Кругликовская, 65, цокольный этаж. Каждый день с 10:00 до 20:00.</p>
+  </div>
+  <div class="demo-box"><b>Это демо.</b> Сделано, чтобы показать идею: расписание без выходных на первом экране, цены на бирках, реальные задачи из отзывов и путь до двери в цоколе.<br><br>Александр Ли · <a href="https://t.me/DezmontDeXa" target="_blank" rel="noopener">@DezmontDeXa</a> · <a href="tel:+79147765705">+7 914 776-57-05</a></div>
+</div></footer>
+
+<nav class="mbar" aria-label="Быстрые действия">
+  <a href="tel:+79181506565"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Позвонить</a>
+  <button class="r" data-max><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Спросить в MAX</button>
+  <a href="#find"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Как пройти</a>
+</nav>
+
+<div class="overlay" id="ov"></div>
+<div class="modal" id="md" role="dialog" aria-modal="true"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const OPEN=10,CLOSE=20;
+const SVC=[
+ {cap:'#3FA86B',t:'Дубликат ключа',time:'5–10 минут, при вас',from:200,d:'Квартирные, сувальдные, гаражные, почтовые. Сделаем полноценный ключ из копии.',list:[['Английский ключ','от 200 ₽'],['Сувальдный ключ','от 350 ₽'],['Почтовый ящик','от 150 ₽'],['Ключ из копии','от 300 ₽']],bring:'Ключ, с которого делать копию. Если замок редкий, лучше сначала спросить в MAX.'},
+ {cap:'#E4B62E',t:'Домофонные ключи',time:'5 минут',from:250,d:'Таблетки, брелоки, магнитные ключи для подъезда.',list:[['Таблетка','от 250 ₽'],['Брелок','от 300 ₽'],['Магнитный ключ','от 300 ₽']],bring:'Рабочий ключ от домофона или адрес дома.'},
+ {cap:'#2F6FD0',t:'Автоключи',time:'от 30 минут',from:500,d:'Ключи для машин, замена корпуса, программирование.',list:[['Ключ без чипа','от 500 ₽'],['Замена корпуса','от 700 ₽'],['Ключ с чипом и программированием','от 1 500 ₽']],bring:'Рабочий ключ от машины. Марку и год лучше написать в MAX заранее.'},
+ {cap:'#C8262B',t:'Ремонт обуви',time:'от 30 минут до 1–2 дней',from:300,d:'Набойки, подошва, прошивка, застёжки и молнии. Срочно тоже можно.',list:[['Набойки','от 300 ₽'],['Прошивка','от 400 ₽'],['Застёжка или молния','от 500 ₽'],['Переклейка подошвы','от 600 ₽']],bring:'Обувь, желательно чистую.'},
+ {cap:'#7B5CC4',t:'Сумки и рюкзаки',time:'1 день',from:400,d:'Замки и бегунки, швы, ручки, фурнитура.',list:[['Замена бегунка','от 400 ₽'],['Подшить шов','от 400 ₽'],['Ручка или ремень','от 500 ₽'],['Замена молнии','от 900 ₽']],bring:'Сумку или рюкзак без содержимого.'},
+ {cap:'#1B1A18',t:'Мелкий ремонт',time:'10–15 минут',from:150,d:'Кнопки на одежду, ремни, батарейки в часах, заточка.',list:[['Кнопка на одежду','от 150 ₽'],['Укоротить ремень','от 300 ₽'],['Батарейка в часах','от 300 ₽'],['Заточка секатора или ножа','от 300 ₽']],bring:'Саму вещь, мастер посмотрит на месте.'}
+];
+const fmt=n=>n.toLocaleString('ru-RU')+' ₽';
+$('#svcs').innerHTML=SVC.map((s,k)=>`<button class="svc" style="--cap:${s.cap}" data-svc="${k}"><span class="time">${s.time}</span><h3>${s.t}</h3><p>${s.d}</p><div class="foot"><span class="price">от ${fmt(s.from)}</span><span class="more">Цены →</span></div></button>`).join('');
+
+const ov=$('#ov'),md=$('#md');
+function openModal(h,cap){md.style.setProperty('--cap',cap||'#C8A04A');md.innerHTML='<button class="x" data-close aria-label="Закрыть"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>'+h;md.classList.add('show');ov.classList.add('show')}
+function closeAll(){md.classList.remove('show');ov.classList.remove('show')}
+ov.onclick=closeAll;md.addEventListener('click',e=>{if(e.target.closest('[data-close]'))closeAll()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
+function maxModal(){openModal(`<h3>Чат мастерской в MAX</h3><p>В рабочей версии кнопка сразу открывает чат «Мастер ключ» в MAX. Можно прислать фото ключа, обуви или сумки и спросить, возьмётся ли мастер и сколько это будет стоить.</p><p style="margin-top:10px">В концепте переход отключён, чтобы мастерской не писали с демо-страницы.</p><button class="btn btn-dark" style="margin-top:18px" data-close>Понятно</button>`)}
+document.addEventListener('click',e=>{if(e.target.closest('[data-max]')){maxModal();return}
+  const b=e.target.closest('[data-svc]');if(!b)return;const s=SVC[b.dataset.svc];
+  openModal(`<h3>${s.t}</h3><p>${s.d} Срок: ${s.time}.</p><div class="plist">${s.list.map(([a,p])=>`<div><span>${a}</span><b>${p}</b></div>`).join('')}</div><p style="margin-top:14px"><b style="color:#1B1A18">Что взять:</b> ${s.bring}</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px"><button class="btn btn-brass btn-sm" data-max>Спросить в MAX</button><a class="btn btn-ghost btn-sm" href="#find" data-close>Как пройти</a></div><p style="font-size:13px;margin-top:12px">Цены для примера.</p>`,s.cap)});
+
+const DAYS=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+const nowKrd=()=>{const p=new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Moscow',hour12:false,hour:'2-digit',minute:'2-digit',weekday:'short'}).formatToParts(new Date());const g=t=>p.find(x=>x.type===t).value;return {h:Number(g('hour'))%24,m:Number(g('minute')),wd:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].indexOf(g('weekday'))}};
+function status(){const {h,m,wd}=nowKrd();const open=h>=OPEN&&h<CLOSE;const left=CLOSE*60-(h*60+m);$('#dot').classList.toggle('closed',!open);
+  $('#stText').innerHTML=open?(left<=60?`Открыто · закроемся через ${left} мин`:'Открыто<span class="st-long"> · до 20:00</span>'):'Закрыто<span class="st-long"> · откроемся в 10:00</span>';
+  $('#week').innerHTML=DAYS.map((d,i)=>`<div class="tag${i===wd?' today':''}"><b>${d}</b>10–20</div>`).join('');
+  $('#weekCap').innerHTML=open?`Сегодня ${DAYS[wd].toLowerCase()}, <b>открыто до 20:00.</b> Выходных нет, суббота и воскресенье тоже.`:(h<OPEN?`Сегодня откроемся в <b>10:00.</b> Выходных нет, суббота и воскресенье тоже.`:`Сегодня уже закрыто, завтра с <b>10:00.</b> Выходных нет.`)}
+status();setInterval(status,60000);
+
+try{const map=L.map('map',{scrollWheelZoom:false}).setView([45.069512,39.024274],16);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);
+  L.marker([45.069512,39.024274],{icon:L.divIcon({className:'',html:'<div style="background:#C8A04A;border:3px solid #1B1A18;width:30px;height:30px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.4)"></div>',iconSize:[30,30],iconAnchor:[15,30]})}).addTo(map).bindPopup('<b>Мастер ключ</b><br>Восточно-Кругликовская, 65, цоколь')}catch(e){$('#map').innerHTML='<p style="padding:20px;color:#77706A">Карта не загрузилась</p>'}
+</script>
+</body>
+</html>
